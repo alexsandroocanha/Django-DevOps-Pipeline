@@ -1,5 +1,8 @@
-name: Deploy Python
-on: push
+name: Deploy For 
+on: 
+  merge_group:
+    branches: ['main']
+    
 jobs:
     teste-run:
         runs-on: ${{ matrix.os }}
@@ -18,6 +21,7 @@ jobs:
 
             - name: List Build
               run: docker images
+
 
     deploy:
         needs: teste-run
