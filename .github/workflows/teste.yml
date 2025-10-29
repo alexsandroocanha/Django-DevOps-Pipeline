@@ -1,1 +1,22 @@
-name: Teste for Pull Request
+name: Deploy Python
+on: 
+  pull_request: 
+    branches: ['main', 'test']
+jobs:
+    teste-run:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: ['ubuntu-latest']
+                
+        env:
+            tag: 'teste'
+            
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Build Aplication
+              run: docker compose build
+
+            - name: List Build
+              run: docker images
