@@ -6,18 +6,19 @@ jobs:
     teste-run:
         runs-on: ${{ matrix.os }}
         env:
-            teste: teste
+            tag: 'teste'
         steps:
             - uses: actions/checkout@v5
 
-            - name: Run Docker Compose
-              run: docker compose up -d
-
             - name: Build Aplication
               run: docker compose build
-            
+
+            - name: List Build
+              run: docker images
 
     deploy:
+        env:
+            tag: ${{ github.sha }}
         runs-on: ${{ matrix.os }}
         environment: Docker
         strategy:
