@@ -1,53 +1,53 @@
-# name: Deploy for Docker Hub
-# on: 
-#     push:
-#         branches: ['main']
-# jobs:
-#     teste-run:
-#         runs-on: ${{ matrix.os }}
-#         strategy:
-#             matrix:
-#                 os: ['ubuntu-latest']
+name: Deploy for Docker Hub
+on: 
+    push:
+        branches: ['main']
+jobs:
+    # teste-run:
+    #     runs-on: ${{ matrix.os }}
+    #     strategy:
+    #         matrix:
+    #             os: ['ubuntu-latest']
                 
-#         env:
-#             tag: 'teste'
-#             name: 'django-app-teste'
-#         steps:
-#             - uses: actions/checkout@v5
+    #     env:
+    #         tag: 'teste'
+    #         name: 'django-app-teste'
+    #     steps:
+    #         - uses: actions/checkout@v5
 
-#             - name: Build Aplication
-#               run: docker compose build
+    #         - name: Build Aplication
+    #           run: docker compose build
 
-#             - name: List Build
-#               run: docker images
+    #         - name: List Build
+    #           run: docker images
 
 
-#     deploy:
-#         needs: teste-run
-#         runs-on: ${{ matrix.os }}
-#         environment: Docker
-#         env:
-#             tag: ${{ github.sha }}
-#             name: 'django-app'
-#         strategy:
-#             matrix:
-#                 os: ['ubuntu-latest']
-#         steps:
-#             - uses: actions/checkout@v5
+    # deploy:
+    #     needs: teste-run
+    #     runs-on: ${{ matrix.os }}
+    #     environment: Docker
+    #     env:
+    #         tag: ${{ github.sha }}
+    #         name: 'django-app'
+    #     strategy:
+    #         matrix:
+    #             os: ['ubuntu-latest']
+    #     steps:
+    #         - uses: actions/checkout@v5
 
-#             - name: Add User and Password
-#               uses: docker/login-action@v3
-#               with:
-#                   username: ${{ secrets.USERNAME }}
-#                   password: ${{ secrets.PASSWORD }}
+    #         - name: Add User and Password
+    #           uses: docker/login-action@v3
+    #           with:
+    #               username: ${{ secrets.USERNAME }}
+    #               password: ${{ secrets.PASSWORD }}
 
-#             - name: Build Image
-#               run: |
-#                   docker compose build --push
+    #         - name: Build Image
+    #           run: |
+    #               docker compose build --push
 
-#             - name: Push image for Docker Hub
-#               run: |
-#                   docker push falace/${{ env.name }}:${{ env.tag }}
+    #         - name: Push image for Docker Hub
+    #           run: |
+    #               docker push falace/${{ env.name }}:${{ env.tag }}
     manifest:
         needs: deploy
         runs-on: ubuntu-latest
