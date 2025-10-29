@@ -71,28 +71,27 @@ jobs:
             - name: Add for GitHub
               run: |
                   cat > ~/Pasta/deployment-k8s.yml <<EOF
-
-                    apiVersion: apps/v1
-                    kind: Deployment
-                    metadata:
-                      name: django-app
-                      labels:
+                  apiVersion: apps/v1
+                  kind: Deployment
+                  metadata:
+                    name: django-app
+                    labels:
+                      app: django
+                  spec:
+                    replicas: 3
+                    selector:
+                      matchLabels:
                         app: django
-                    spec:
-                      replicas: 3
-                      selector:
-                        matchLabels:
+                    template:
+                      metadata:
+                        labels:
                           app: django
-                      template:
-                        metadata:
-                          labels:
-                            app: django
-                        spec:
-                          containers:
-                            - name: django
-                              image: falace/${{ env.name }}:${{ env.tag }}
-                              ports:
-                              - containerPort: 80
+                      spec:
+                        containers:
+                          - name: django
+                            image: falace/${{ env.name }}:${{ env.tag }}
+                            ports:
+                            - containerPort: 80
 
                   EOF
                   cd ~/Pasta
