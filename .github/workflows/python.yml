@@ -3,8 +3,13 @@ on: push
 jobs:
     teste-run:
         runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: ['ubuntu-latest']
+                
         env:
             tag: 'teste'
+            
         steps:
             - uses: actions/checkout@v5
 
