@@ -1,7 +1,5 @@
 name: Deploy Python
-on: 
-    push:
-        branches: ['main', '*']
+on: push
 jobs:
     teste-run:
         runs-on: ${{ matrix.os }}
