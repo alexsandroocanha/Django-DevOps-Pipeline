@@ -20,4 +20,4 @@ jobs:
 
             - name: Build Image
               run: |
-                  docker build -t falace/django-app:latest
+                  docker compose build -t falace/django-app:latest
