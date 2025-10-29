@@ -1,7 +1,7 @@
 name: Deploy Python
 on: 
     push:
-        branches: ['main']
+        branches: ['main', 'dev/ci']
 jobs:
     build:
         runs-on: ${{ matrix.os }}
@@ -20,4 +20,4 @@ jobs:
 
             - name: Build Image
               run: |
-                  docker compose build -t falace/django-app:latest
+                  docker compose build --push
