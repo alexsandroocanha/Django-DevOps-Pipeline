@@ -55,7 +55,7 @@ jobs:
         steps:
             - name: Add SSH Key
               uses: webfactory/ssh-agent@v0.9.0
-              with: ${{ secrets.SSH-KEY }}
+              with: ${{ secrets.SSH_AGENT }}
             - name: Add for GitHub
               run: |
                   mkdir Pasta
