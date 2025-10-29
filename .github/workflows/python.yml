@@ -1,0 +1,9 @@
+name: Deploy Python
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                os: ['']
+        steps:
