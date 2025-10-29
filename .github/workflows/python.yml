@@ -15,10 +15,11 @@ jobs:
               run: docker images
 
     deploy:
-        env:
-            tag: ${{ github.sha }}
+        needs: teste-run
         runs-on: ${{ matrix.os }}
         environment: Docker
+        env:
+            tag: ${{ github.sha }}
         strategy:
             matrix:
                 os: ['ubuntu-latest']
