@@ -11,7 +11,7 @@ jobs:
                 
         env:
             tag: 'teste'
-            
+            name: 'django-app-teste'
         steps:
             - uses: actions/checkout@v5
 
@@ -28,6 +28,7 @@ jobs:
         environment: Docker
         env:
             tag: ${{ github.sha }}
+            name: 'django-app-teste'
         strategy:
             matrix:
                 os: ['ubuntu-latest']
