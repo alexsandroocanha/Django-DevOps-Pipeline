@@ -3,7 +3,21 @@ on:
     push:
         branches: ['main', 'dev/ci']
 jobs:
-    build:
+    teste-run:
+        runs-on: ${{ matrix.os }}
+        env:
+            teste: teste
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Run Docker Compose
+              run: docker compose up -d
+
+            - name: Build Aplication
+              run: docker compose build
+            
+
+    deploy:
         runs-on: ${{ matrix.os }}
         environment: Docker
         strategy:
@@ -20,7 +34,7 @@ jobs:
 
             - name: Build Image
               run: |
-                  docker compose build
+                  docker compose build --push
 
             - name: Push image for Docker Hub
               run: |
