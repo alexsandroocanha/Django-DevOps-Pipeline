@@ -2,6 +2,7 @@ services:
   web: 
     build:
       context: app
+      image: falace/django-app:latest
       target: builder
     ports: 
       - '8000:8000'
