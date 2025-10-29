@@ -1,8 +1,5 @@
-name: Deploy For 
-on: 
-  merge_group:
-    branches: ['main']
-    
+name: Deploy for Docker Hub
+on: push
 jobs:
     teste-run:
         runs-on: ${{ matrix.os }}
