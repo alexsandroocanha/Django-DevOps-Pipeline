@@ -56,17 +56,20 @@ jobs:
               uses: webfactory/ssh-agent@v0.9.0
               with: 
                   ssh-private-key: ${{ secrets.SSH_AGENT }}
-            - name: Add for GitHub
+
+            - name: Create Repo
               run: |
-                  mkdir Pasta
-                  git init Pasta/
+                  mkdir ~/Pasta
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
                   git clone git@github.com:alexsandroocanha/Django-DevOps-Pipeline-Manifest.git Pasta/
+                  
+            - name: Add for GitHub
+              run: |
                   cat > ~/Pasta/deployment-k8s.yml <<EOF
                       Bazinga
                   EOF
-                  cd Pasta
+                  cd ~/Pasta
                   git add .
                   git commit -m "${{ github.sha }}"
                   git push -u origin master
