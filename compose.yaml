@@ -2,7 +2,7 @@ services:
   web: 
     build:
       context: app
-      image: falace/django-app:$tag
+      image: falace/django-app:${tag}
       target: builder
     ports: 
       - '8000:8000'
