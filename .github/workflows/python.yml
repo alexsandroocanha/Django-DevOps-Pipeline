@@ -20,4 +20,8 @@ jobs:
 
             - name: Build Image
               run: |
-                  docker compose build --push
+                  docker compose build
+
+            - name: Push image for Docker Hub
+              run: |
+                  docker push falace/django-app:latest
