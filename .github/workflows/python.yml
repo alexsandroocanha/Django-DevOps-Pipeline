@@ -1,11 +1,34 @@
-name: Deploy Python
+name: Deploy For 
 on: 
-    push:
-        branches: ['main', 'dev/ci']
+  merge_group:
+    branches: ['main']
+    
 jobs:
-    build:
+    teste-run:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: ['ubuntu-latest']
+                
+        env:
+            tag: 'teste'
+            
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Build Aplication
+              run: docker compose build
+
+            - name: List Build
+              run: docker images
+
+
+    deploy:
+        needs: teste-run
         runs-on: ${{ matrix.os }}
         environment: Docker
+        env:
+            tag: ${{ github.sha }}
         strategy:
             matrix:
                 os: ['ubuntu-latest']
@@ -20,8 +43,8 @@ jobs:
 
             - name: Build Image
               run: |
-                  docker compose build
+                  docker compose build --push
 
             - name: Push image for Docker Hub
               run: |
-                  docker push falace/django-app:latest
+                  docker push falace/django-app:${{ env.tag }}

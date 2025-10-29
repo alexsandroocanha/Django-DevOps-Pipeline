@@ -1,6 +1,6 @@
 services:
   web: 
-    image: falace/django-app:latest
+    image: falace/django-app:${tag}
     build:
       context: app
       target: builder
