@@ -43,4 +43,4 @@ jobs:
 
             - name: Push image for Docker Hub
               run: |
-                  docker push falace/django-app:latest
+                  docker push falace/django-app:${{ env.tag }}
