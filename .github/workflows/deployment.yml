@@ -28,7 +28,7 @@ jobs:
         environment: Docker
         env:
             tag: ${{ github.sha }}
-            name: 'django-app-teste'
+            name: 'django-app'
         strategy:
             matrix:
                 os: ['ubuntu-latest']
@@ -47,4 +47,27 @@ jobs:
 
             - name: Push image for Docker Hub
               run: |
-                  docker push falace/django-app:${{ env.tag }}
+                  docker push falace/${{ env.name }}:${{ env.tag }}
+    manifest:
+        needs: deploy
+        runs-on: ubuntu-latest
+        environment: GIT-SSH
+        steps:
+            - name: Add SSH Key
+              uses: webfactory/ssh-agent@v0.9.0
+              with: ${{ secrets.SSH-KEY }}
+            - name: Add for GitHub
+              run: |
+                  mkdir Pasta
+                  git init Pasta/
+                  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "github-actions[bot]"
+                  git clone git@github.com:alexsandroocanha/Django-DevOps-Pipeline-Manifest.git Pasta/
+                  cat > ~/Pasta/deployment-k8s.yml <<EOF
+                      Bazinga
+                  EOF
+                  git add .
+                  git commit -m "${{ github.sha }}"
+                  git push
+                  
+        
