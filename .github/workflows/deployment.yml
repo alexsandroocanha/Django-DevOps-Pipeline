@@ -49,7 +49,6 @@ jobs:
     #           run: |
     #               docker push falace/${{ env.name }}:${{ env.tag }}
     manifest:
-        needs: deploy
         runs-on: ubuntu-latest
         environment: GIT-SSH
         steps:
